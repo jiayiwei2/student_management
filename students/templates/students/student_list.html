@@ -1,0 +1,40 @@
+<!-- templates/students/student_list.html -->
+<form method="get" action="">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+<h2>Student List</h2>
+<ul>
+    {% for student in students %}
+    <li><a href="{% url 'student_detail' pk=student.pk %}">{{ student.first_name }} {{ student.last_name }}</a></li>
+    {% endfor %}
+</ul>
+
+<div>
+    <span class="step-links">
+        {% if students.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ students.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ students.number }} of {{ students.paginator.num_pages }}.
+        </span>
+
+        {% if students.has_next %}
+            <a href="?page={{ students.next_page_number }}">next</a>
+            <a href="?page={{ students.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<a href="{% url 'student_add' %}">Add New Student</a>
+
+<!-- 任何模板 -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}

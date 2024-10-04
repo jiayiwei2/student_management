@@ -1,0 +1,16 @@
+<!-- templates/students/student_detail.html -->
+<h2>{{ student.first_name }} {{ student.last_name }}</h2>
+<p>Email: {{ student.email }}</p>
+<p>Date of Birth: {{ student.date_of_birth }}</p>
+<p>Enrollment Date: {{ student.enrollment_date }}</p>
+<p>Grade: {{ student.grade }}</p>
+<a href="{% url 'student_edit' pk=student.pk %}">Edit</a>
+
+<!-- 任何模板 -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
